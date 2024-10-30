@@ -294,13 +294,11 @@
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
                         <div class="media user-box align-items-center">
                             <div class="media-body user-info">
-                                <p class="user-name mb-0">{{ auth()->user()->name }}</p>
                                 <p class="designattion mb-0">Available</p>
                             </div>
-                            <img src="{{ auth()->user()->image_dir?asset(auth()->user()->image_dir.auth()->user()->image):asset('images/110x110.png') }}" class="user-img" alt="user avatar">
                         </div>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="{{ route('users.profile') }}"><i
+                    <div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href=""><i
                                 class="bx bx-user"></i><span>Profile</span></a>
                         <a class="dropdown-item" href="javascript:;"><i
                                 class="bx bx-cog"></i><span>Settings</span></a>
@@ -314,7 +312,7 @@
                         <a class="dropdown-item" href="javascript:;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="bx bx-power-off"></i><span>Logout</span>
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}"
+                        <form id="logout-form" action=""
                               method="POST" style="display: none;">
                            @csrf
                         </form>
@@ -335,7 +333,7 @@
                         @foreach( LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                             <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"><i
                                     class="flag-icon flag-icon-{{ $properties['flag'] }}"></i>
-                                <span>{{ __($properties['name']) }}</span></a>
+                                <span></span></a>
                         @endforeach
 
 

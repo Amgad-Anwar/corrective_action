@@ -13,7 +13,7 @@
             @endif
             <!--breadcrumb-->
             <div class="page-breadcrumb d-md-flex align-items-center mb-3">
-                <div class="breadcrumb-title pr-3">{{ __('Meals') }}</div>
+                <div class="breadcrumb-title pr-3">{{ __('Data') }}</div>
                 <div class="pl-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
@@ -21,22 +21,18 @@
                                     {{ __('Home') }}</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page"><i class="bx bx-shape-polygon"></i>
-                                {{ __('Meals') }}</li>
+                                {{ __('Data') }}</li>
                         </ol>
                     </nav>
                 </div>
 
                 <div class="ml-auto">
 
-                    @if (PerUser('meals.destroy'))
-                        <a href="#" class="btn btn-danger delete-selected"><i
-                                class="fadeIn animated bx bx-trash-alt"></i> {!! __('Delete Selected :type', ['type' => '']) !!}</a>
-                    @endif
-                    @if (PerUser('meals.create'))
-                        <a href="{{ route('meals.create') }}" class="btn btn-primary"><i
+            
+                        <a href="{{ route('corrective_actions.create') }}" class="btn btn-primary"><i
                                 class="fadeIn animated bx bx-message-square-add"></i>
                             {{ __('Create :type', ['type' => '']) }}</a>
-                    @endif
+                 
                 </div>
             </div>
        
@@ -46,7 +42,7 @@
 
                 <div class="card-body">
                     <div class="card-title">
-                        <h4 class="mb-0">{{ __('Meals') }}</h4>
+                        <h4 class="mb-0">{{ __('Data') }}</h4>
                     </div>
                
 
@@ -106,7 +102,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{{ route('meals.multi_destroy') }}",
+                        url: "{{ route('corrective_actions.multi_destroy') }}",
                         data: {
                             IDS
                         },
@@ -138,7 +134,7 @@
             checkMultiDeleteButton();
             addSelectedCount();
         });
-        @if (PerUser('meals.destroy'))
+        @if (PerUser('corrective_actions.destroy'))
 
             $(document).on('click', '.delete-this', function(e) {
                 e.preventDefault();

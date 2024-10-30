@@ -2,8 +2,8 @@
 
 namespace App\DataTables;
 
+use App\Models\CorrectiveAction;
 use App\Models\Meal;
-use App\Models\PackagePrice;
 use App\Models\State;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -14,7 +14,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PackagePriceDataTable extends DataTable
+class CorrectiveActionDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -34,21 +34,16 @@ class PackagePriceDataTable extends DataTable
      
             ->addColumn('action', function($model){
                 $html='<div class="btn-group pull-right">';
-                if(PerUser('package_prices.edit')){
-                    $html.='<a href="'.route('package_prices.edit', $model->id).'" class="btn btn-sm btn-success"><span class="fadeIn animated bx bx-edit-alt"> </span></a>';
-                }
-                if(PerUser('package_prices.destroy')){
-                    $html.='<a href="#" class="btn btn-sm btn-danger delete-this" data-id="'.$model->id.'" data-url="'.route('package_prices.destroy',$model->id).'"><span class="fadeIn animated bx bx-trash"> </span></a>';
-                }
+                    $html.='<a href="'.route('corrective_actions.edit', $model->id).'" class="btn btn-sm btn-success"><span class="fadeIn animated bx bx-edit-alt"> </span></a>';
+             
+              
+                    $html.='<a href="#" class="btn btn-sm btn-danger delete-this" data-id="'.$model->id.'" data-url="'.route('corrective_actions.destroy',$model->id).'"><span class="fadeIn animated bx bx-trash"> </span></a>';
+              
                 $html.='</div>';
                 return$html;
             })
             ->editColumn('created_at',function ($model){
                 return $model->created_at?$model->created_at->format('Y-m-d H:i:s'):'';
-            })
-
-            ->editColumn( 'package_id',function ($model){
-                return $model->package?->name_en ;
             })
 
             ->rawColumns(['image','checkbox','active','default','action'  , 'is_active' ])
@@ -61,7 +56,7 @@ class PackagePriceDataTable extends DataTable
      * @param \App\Models\State $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(PackagePrice $model): QueryBuilder
+    public function query(CorrectiveAction $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -106,9 +101,10 @@ class PackagePriceDataTable extends DataTable
                 ->width('10px')
                 ->orderable(false),
             Column::make('id'),
-            Column::make('package_id')->title('Package'),
-            Column::make('price'),
-            Column::make('off_days'),
+            Column::make('document_name'),
+            Column::make('issue_date'),
+            Column::make('operation_manager'),
+            Column::make('production_manager'),
        
             Column::make('created_at'),
             Column::computed('action')
